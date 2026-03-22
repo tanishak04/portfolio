@@ -9,7 +9,7 @@ interface Particle {
     vx: number;
     vy: number;
     radius: number;
-    pulseOffset: number; // unique phase per particle for pulsing
+    pulseOffset: number;
 }
 
 export function NeuralNetwork({ className = "" }: { className?: string }) {
@@ -46,6 +46,9 @@ export function NeuralNetwork({ className = "" }: { className?: string }) {
         const ctx = canvas.getContext("2d");
         if (!ctx) return;
 
+        // Detect touch/coarse-pointer devices
+        const isTouchDevice = window.matchMedia("(pointer: coarse)").matches;
+
         const resizeCanvas = () => {
             const rect = canvas.parentElement?.getBoundingClientRect();
             if (!rect) return;
@@ -61,6 +64,7 @@ export function NeuralNetwork({ className = "" }: { className?: string }) {
         resizeCanvas();
         window.addEventListener("resize", resizeCanvas);
 
+        // Only attach mouse/touch interaction on non-touch (desktop) devices
         const handleMouseMove = (e: MouseEvent) => {
             const rect = canvas.getBoundingClientRect();
             mouse.current.x = e.clientX - rect.left;
@@ -72,8 +76,12 @@ export function NeuralNetwork({ className = "" }: { className?: string }) {
             mouse.current.y = -1000;
         };
 
-        canvas.addEventListener("mousemove", handleMouseMove);
-        canvas.addEventListener("mouseleave", handleMouseLeave);
+        if (!isTouchDevice) {
+            // Desktop: attach mouse interaction to canvas only
+            canvas.addEventListener("mousemove", handleMouseMove, { passive: true });
+            canvas.addEventListener("mouseleave", handleMouseLeave, { passive: true });
+        }
+        // Touch devices: no mouse/touch listeners — only ambient particle movement
 
         const animate = () => {
             const rect = canvas.parentElement?.getBoundingClientRect();
@@ -86,7 +94,6 @@ export function NeuralNetwork({ className = "" }: { className?: string }) {
 
             ctx.clearRect(0, 0, w, h);
 
-            // Subtle grey for links (minimal luxurious aesthetic)
             const linkColor = "rgba(80, 80, 80,";
             const isDark = resolvedTheme === "dark";
 
@@ -94,7 +101,7 @@ export function NeuralNetwork({ className = "" }: { className?: string }) {
 
             // Update positions
             for (const p of pts) {
-                // Mouse repulsion
+                // Mouse repulsion (only active on desktop — mouse stays at -1000 on touch)
                 const dx = p.x - mouse.current.x;
                 const dy = p.y - mouse.current.y;
                 const dist = Math.sqrt(dx * dx + dy * dy);
@@ -125,7 +132,7 @@ export function NeuralNetwork({ className = "" }: { className?: string }) {
                 p.y = Math.max(0, Math.min(h, p.y));
             }
 
-            // Draw links — subtle grey
+            // Draw links
             for (let i = 0; i < pts.length; i++) {
                 for (let j = i + 1; j < pts.length; j++) {
                     const dx = pts[i].x - pts[j].x;
@@ -143,7 +150,7 @@ export function NeuralNetwork({ className = "" }: { className?: string }) {
                 }
             }
 
-            // Draw particles with pulsing opacity (firing neurons)
+            // Draw particles with pulsing opacity
             for (const p of pts) {
                 const pulse = 0.3 + Math.sin(time * 2 + p.pulseOffset) * 0.25;
                 const nodeColor = isDark
@@ -166,7 +173,7 @@ export function NeuralNetwork({ className = "" }: { className?: string }) {
                 }
             }
 
-            // Draw mouse connections
+            // Draw mouse connections (desktop only — mouse stays off-screen on touch)
             if (mouse.current.x > 0) {
                 for (const p of pts) {
                     const dx = p.x - mouse.current.x;
@@ -192,8 +199,10 @@ export function NeuralNetwork({ className = "" }: { className?: string }) {
         return () => {
             cancelAnimationFrame(animFrame.current);
             window.removeEventListener("resize", resizeCanvas);
-            canvas.removeEventListener("mousemove", handleMouseMove);
-            canvas.removeEventListener("mouseleave", handleMouseLeave);
+            if (!isTouchDevice) {
+                canvas.removeEventListener("mousemove", handleMouseMove);
+                canvas.removeEventListener("mouseleave", handleMouseLeave);
+            }
         };
     }, [resolvedTheme, initParticles]);
 
@@ -202,7 +211,13 @@ export function NeuralNetwork({ className = "" }: { className?: string }) {
             <canvas
                 ref={canvasRef}
                 className="absolute inset-0 w-full h-full"
-                style={{ cursor: "crosshair", display: "block", pointerEvents: "auto", touchAction: "none" }}
+                style={{
+                    display: "block",
+                    pointerEvents: "auto",
+                    touchAction: "pan-y",
+                    zIndex: -1,
+                    cursor: "crosshair",
+                }}
             />
             {/* Glassmorphism Status Card */}
             <div

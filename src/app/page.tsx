@@ -8,7 +8,7 @@ import Image from "next/image";
 
 import { CustomThemeToggle } from "@/components/CustomThemeToggle";
 import { NeuralNetwork } from "@/components/NeuralNetwork";
-import { NeuralSynapseRail } from "@/components/NeuralSynapseRail";
+
 import { LoadingScreen } from "@/components/LoadingScreen";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 
@@ -38,8 +38,8 @@ export default function PortfolioPage() {
       <div className="mx-auto min-h-screen bg-background text-foreground">
 
         {/* HEADER SECTION */}
-        <header className="grid grid-cols-3 items-center py-4 px-8 grid-border-b uppercase text-sm tracking-widest font-sans font-medium">
-          <div className="flex items-center">TANISHAK MOHAN KATIYAR</div>
+        <header className="grid grid-cols-1 md:grid-cols-3 items-center gap-3 md:gap-0 py-4 px-5 md:px-8 grid-border-b uppercase text-sm tracking-widest font-sans font-medium">
+          <div className="flex items-center justify-center md:justify-start">TANISHAK MOHAN KATIYAR</div>
           <div className="flex items-center justify-center">
             <a
               href="https://drive.google.com/file/d/1TMEU7xTc_c7e8VnXCqBAmkGA7CqTV4EY/view?usp=sharing"
@@ -66,12 +66,12 @@ export default function PortfolioPage() {
         </header>
 
         {/* HERO SECTION */}
-        <section data-synapse-section="hero" className="flex flex-col items-center justify-center pt-24 pb-16 grid-border-b text-center relative overflow-hidden">
-          <h1 ref={heroTitleRef} className="text-7xl md:text-[9rem] font-display leading-[0.8] mb-4" style={{ letterSpacing: '-0.02em' }}>
+        <section className="flex flex-col items-center justify-center pt-16 md:pt-24 pb-16 px-5 md:px-8 grid-border-b text-center relative overflow-hidden">
+          <h1 ref={heroTitleRef} className="text-5xl md:text-[9rem] font-display leading-[0.8] mb-4" style={{ letterSpacing: '-0.02em' }}>
             AI & ML <br className="md:hidden" />
             <span className="md:ml-4">DEVELOPER</span>
           </h1>
-          <h2 ref={heroSubRef} className="text-7xl md:text-[9rem] font-display leading-[0.8] outline-text mb-12" style={{ letterSpacing: '-0.02em' }}>
+          <h2 ref={heroSubRef} className="text-5xl md:text-[9rem] font-display leading-[0.8] outline-text mb-12" style={{ letterSpacing: '-0.02em' }}>
             PORTFOLIO
           </h2>
 
@@ -125,7 +125,7 @@ export default function PortfolioPage() {
               link: '#',
             },
           ].map((project) => (
-            <div key={project.id} data-synapse-section={project.id} className="border-b border-foreground">
+            <div key={project.id} className="border-b border-foreground">
               {/* Collapsed row */}
               <div
                 className="flex justify-between items-center p-8 md:px-16 cursor-pointer select-none hover:bg-foreground/[0.03] transition-all duration-[400ms] ease-[cubic-bezier(0.4,0,0.2,1)] group"
@@ -163,7 +163,7 @@ export default function PortfolioPage() {
         </section>
 
         {/* PROCESS ACCORDION */}
-        <section data-synapse-section="learning" className="grid-border-b">
+        <section className="grid-border-b">
           <div ref={journeyTitleRef} className="py-12 px-8 md:px-16 text-center grid-border-b">
             <h2 className="text-6xl md:text-8xl font-display" style={{ letterSpacing: '-0.02em' }}>MY LEARNING</h2>
             <h2 className="text-6xl md:text-8xl font-display outline-text" style={{ letterSpacing: '-0.02em' }}>JOURNEY</h2>
@@ -206,12 +206,12 @@ export default function PortfolioPage() {
         </section>
 
         {/* SERVICES — Neural Network Background */}
-        <section data-synapse-section="skills" className="grid-border-b relative min-h-[500px] overflow-hidden">
+        <section className="grid-border-b relative min-h-[500px] overflow-hidden">
           {/* Neural Network fills entire background */}
           <NeuralNetwork className="absolute inset-0 w-full h-full z-0" />
 
           {/* Content overlay — pointer-events-none on container, auto on interactive children */}
-          <div className="relative z-10 p-8 md:p-16 flex flex-col items-center font-sans pointer-events-none">
+          <div className="relative z-10 p-5 md:p-16 flex flex-col items-center font-sans pointer-events-none">
             <div className="mb-12 text-center">
               <h2 ref={servicesTitleRef} className="text-3xl md:text-5xl font-display mb-2" style={{ letterSpacing: '-0.02em' }}>HOW <span className="outline-text">CAN</span> I HELP?</h2>
             </div>
@@ -279,7 +279,7 @@ export default function PortfolioPage() {
         </section>
 
         {/* FINAL CONTACT SECTION */}
-        <footer data-synapse-section="contact" id="contact" className="relative flex flex-col p-8 md:p-16 pt-20 pb-8">
+        <footer id="contact" className="relative flex flex-col px-5 md:px-16 py-8 md:pt-20 md:pb-8">
           <h1 ref={contactTitleRef} className="text-6xl md:text-[10rem] font-display leading-[0.8]" style={{ letterSpacing: '-0.02em' }}>CONTACT</h1>
 
           <h1 ref={contactMeRef} className="text-6xl md:text-[10rem] font-display leading-[0.8] outline-text mb-2" style={{ letterSpacing: '-0.02em' }}>ME</h1>
@@ -419,8 +419,7 @@ export default function PortfolioPage() {
           </div>
         </footer>
 
-        {/* Neural Synapse Rail — scroll indicator */}
-        <NeuralSynapseRail />
+
 
         {/* Keyframes inline for bespoke animations */}
         <style dangerouslySetInnerHTML={{
