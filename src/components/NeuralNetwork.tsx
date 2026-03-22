@@ -65,8 +65,6 @@ export function NeuralNetwork({ className = "" }: { className?: string }) {
         window.addEventListener("resize", resizeCanvas);
 
         // Only attach mouse/touch interaction on non-touch (desktop) devices
-        const wrapper = canvas.parentElement;
-
         const handleMouseMove = (e: MouseEvent) => {
             const rect = canvas.getBoundingClientRect();
             mouse.current.x = e.clientX - rect.left;
@@ -78,19 +76,12 @@ export function NeuralNetwork({ className = "" }: { className?: string }) {
             mouse.current.y = -1000;
         };
 
-        if (!isTouchDevice && wrapper) {
-            // Desktop: attach mouse interaction to wrapper div (canvas is pointer-events:none)
-            wrapper.addEventListener("mousemove", handleMouseMove as EventListener, { passive: true });
-            wrapper.addEventListener("mouseleave", handleMouseLeave as EventListener, { passive: true });
+        if (!isTouchDevice) {
+            // Desktop: attach mouse interaction to canvas only
+            canvas.addEventListener("mousemove", handleMouseMove, { passive: true });
+            canvas.addEventListener("mouseleave", handleMouseLeave, { passive: true });
         }
-
-        // Passive touch listeners — lets browser scroll instantly
-        if (wrapper) {
-            const noop = () => {};
-            wrapper.addEventListener("touchstart", noop, { passive: true });
-            wrapper.addEventListener("touchmove", noop, { passive: true });
-        }
-        // Touch devices: no active interaction — only ambient particle movement
+        // Touch devices: no mouse/touch listeners — only ambient particle movement
 
         const animate = () => {
             const rect = canvas.parentElement?.getBoundingClientRect();
@@ -208,30 +199,26 @@ export function NeuralNetwork({ className = "" }: { className?: string }) {
         return () => {
             cancelAnimationFrame(animFrame.current);
             window.removeEventListener("resize", resizeCanvas);
-            if (!isTouchDevice && wrapper) {
-                wrapper.removeEventListener("mousemove", handleMouseMove as EventListener);
-                wrapper.removeEventListener("mouseleave", handleMouseLeave as EventListener);
+            if (!isTouchDevice) {
+                canvas.removeEventListener("mousemove", handleMouseMove);
+                canvas.removeEventListener("mouseleave", handleMouseLeave);
             }
         };
     }, [resolvedTheme, initParticles]);
 
     return (
         <div className={`overflow-hidden ${className}`} style={{ height: "100%" }}>
-            {/* Wrapper: allows touch scrolling, confines interaction area */}
-            <div
+            <canvas
+                ref={canvasRef}
                 className="absolute inset-0 w-full h-full"
-                style={{ pointerEvents: "auto", touchAction: "pan-y", zIndex: -1 }}
-            >
-                <canvas
-                    ref={canvasRef}
-                    className="w-full h-full"
-                    style={{
-                        display: "block",
-                        pointerEvents: "none",
-                        cursor: "crosshair",
-                    }}
-                />
-            </div>
+                style={{
+                    display: "block",
+                    pointerEvents: "auto",
+                    touchAction: "pan-y",
+                    zIndex: -1,
+                    cursor: "crosshair",
+                }}
+            />
             {/* Glassmorphism Status Card */}
             <div
                 className="hidden md:block md:absolute md:bottom-6 md:right-6 z-10 px-5 py-4 rounded-lg border border-foreground/10"

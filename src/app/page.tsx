@@ -37,45 +37,31 @@ export default function PortfolioPage() {
       {isLoading && <LoadingScreen onComplete={() => setIsLoading(false)} />}
       <div className="mx-auto min-h-screen bg-background text-foreground">
 
-        {/* Fixed nav — top-left */}
-        <nav
-          style={{
-            position: "fixed",
-            top: "1.5rem",
-            left: "1.5rem",
-            display: "flex",
-            gap: "1rem",
-            zIndex: 100,
-            fontFamily: "monospace",
-            fontSize: "12px",
-            textTransform: "uppercase",
-          }}
-        >
-          <a href="#about" className="hover:underline text-foreground">ABOUT</a>
-          <a href="#contact" className="hover:underline text-foreground">CONTACT</a>
-        </nav>
-
-        {/* Fixed toggle — top-right */}
-        <CustomThemeToggle />
-
         {/* HEADER SECTION */}
-        <header className="flex flex-col items-center gap-3 py-4 px-5 md:px-8 grid-border-b uppercase text-sm tracking-widest font-sans font-medium">
-          <div className="text-center">TANISHAK MOHAN KATIYAR</div>
+        <header className="grid grid-cols-[auto_1fr_auto] items-center py-3 md:py-4 px-4 md:px-8 grid-border-b uppercase text-xs md:text-sm tracking-widest font-sans font-medium">
+          <div className="flex items-center">TANISHAK MOHAN KATIYAR</div>
           <div className="flex items-center justify-center">
             <a
               href="https://drive.google.com/file/d/1TMEU7xTc_c7e8VnXCqBAmkGA7CqTV4EY/view?usp=sharing"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-2 rounded-full px-5 py-2 border border-foreground/40 hover:border-foreground hover:bg-foreground/5 transition-all duration-500"
+              className="flex items-center gap-2 rounded-full px-3 md:px-5 py-1.5 md:py-2 border border-foreground/40 hover:border-foreground hover:bg-foreground/5 transition-all duration-500 text-[10px] md:text-sm"
               style={{ animation: 'pulse-glow 3s ease-in-out infinite', boxShadow: '0 2px 12px rgba(140,140,140,0.08)' }}
             >
-              Download Résumé
+              <span className="hidden md:inline">Download</span> Résumé
               <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="square" strokeLinejoin="miter">
                 <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
                 <polyline points="7 10 12 15 17 10"></polyline>
                 <line x1="12" y1="15" x2="12" y2="3"></line>
               </svg>
             </a>
+          </div>
+          <div className="flex items-center justify-end gap-3 md:gap-6">
+            <CustomThemeToggle />
+            <nav className="flex flex-col text-right text-[9px] md:text-xs gap-0.5 md:gap-1 uppercase font-bold">
+              <a href="#about" className="hover:underline">ABOUT</a>
+              <a href="#contact" className="hover:underline">CONTACT</a>
+            </nav>
           </div>
         </header>
 
