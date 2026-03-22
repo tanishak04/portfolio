@@ -38,7 +38,6 @@ export const CustomThemeToggle = () => {
             animation: theme-circle-expand 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
         `;
 
-        // Inject dynamic keyframes with the correct origin
         const styleEl = document.createElement("style");
         styleEl.textContent = `
             @keyframes theme-circle-expand {
@@ -50,19 +49,17 @@ export const CustomThemeToggle = () => {
         document.head.appendChild(styleEl);
         document.body.appendChild(overlay);
 
-        // Switch theme at midpoint
         setTimeout(() => {
             setTheme(isDark ? "light" : "dark");
         }, 400);
 
-        // Cleanup
         setTimeout(() => {
             overlay.remove();
             styleEl.remove();
         }, 850);
     }, [resolvedTheme, setTheme]);
 
-    if (!mounted) return <div style={{ width: "44px", height: "20px" }} />;
+    if (!mounted) return null;
 
     const isDark = resolvedTheme === "dark";
 
@@ -73,17 +70,20 @@ export const CustomThemeToggle = () => {
             onClick={toggleTheme}
             aria-label="Toggle Dark Mode"
             style={{
+                position: "fixed",
+                top: "1.5rem",
+                right: "1.5rem",
+                margin: 0,
+                zIndex: 100,
                 background: "transparent",
                 border: "none",
                 cursor: "pointer",
-                fontFamily: "'JetBrains Mono', 'Courier New', monospace",
-                fontSize: "14px",
+                fontFamily: "monospace",
+                fontSize: "12px",
                 letterSpacing: "2px",
+                textTransform: "uppercase" as const,
                 color: "hsl(var(--foreground))",
-                padding: "8px 12px",
-                backdropFilter: "blur(10px)",
-                WebkitBackdropFilter: "blur(10px)",
-                borderRadius: "8px",
+                padding: "8px",
                 display: "flex",
                 alignItems: "center",
                 gap: "0px",

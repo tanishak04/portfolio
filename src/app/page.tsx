@@ -37,9 +37,30 @@ export default function PortfolioPage() {
       {isLoading && <LoadingScreen onComplete={() => setIsLoading(false)} />}
       <div className="mx-auto min-h-screen bg-background text-foreground">
 
+        {/* Fixed nav — top-left */}
+        <nav
+          style={{
+            position: "fixed",
+            top: "1.5rem",
+            left: "1.5rem",
+            display: "flex",
+            gap: "1rem",
+            zIndex: 100,
+            fontFamily: "monospace",
+            fontSize: "12px",
+            textTransform: "uppercase",
+          }}
+        >
+          <a href="#about" className="hover:underline text-foreground">ABOUT</a>
+          <a href="#contact" className="hover:underline text-foreground">CONTACT</a>
+        </nav>
+
+        {/* Fixed toggle — top-right */}
+        <CustomThemeToggle />
+
         {/* HEADER SECTION */}
-        <header className="grid grid-cols-1 md:grid-cols-3 items-center gap-3 md:gap-0 py-4 px-5 md:px-8 grid-border-b uppercase text-sm tracking-widest font-sans font-medium">
-          <div className="flex items-center justify-center md:justify-start">TANISHAK MOHAN KATIYAR</div>
+        <header className="flex flex-col items-center gap-3 py-4 px-5 md:px-8 grid-border-b uppercase text-sm tracking-widest font-sans font-medium">
+          <div className="text-center">TANISHAK MOHAN KATIYAR</div>
           <div className="flex items-center justify-center">
             <a
               href="https://drive.google.com/file/d/1TMEU7xTc_c7e8VnXCqBAmkGA7CqTV4EY/view?usp=sharing"
@@ -55,13 +76,6 @@ export default function PortfolioPage() {
                 <line x1="12" y1="15" x2="12" y2="3"></line>
               </svg>
             </a>
-          </div>
-          <div className="flex items-center justify-end gap-6">
-            <CustomThemeToggle />
-            <nav className="flex flex-col text-right text-xs gap-1 uppercase font-bold">
-              <a href="#about" className="hover:underline">ABOUT</a>
-              <a href="#contact" className="hover:underline">CONTACT</a>
-            </nav>
           </div>
         </header>
 
