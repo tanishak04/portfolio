@@ -1,0 +1,47 @@
+# AI & ML DEVELOPER PORTFOLIO - PROJECT SUMMARY
+Author: Tanishak Mohan Katiyar
+Stack: Next.js, React, Tailwind CSS, HTML5 Canvas, EmailJS
+
+============================================================
+1. CORE AESTHETIC & ARCHITECTURE
+============================================================
+- Brutalist & Minimalist Design: Adopted a modern, grid-based aesthetic prioritizing large-scale typography (JetBrains Mono & display fonts) and stark contrast.
+- Single-Page Application (SPA): All content consolidated into `page.tsx`, functioning as a smooth-scrolling portfolio.
+- Performance First: No heavy 3D rendering libraries like Three.js used to ensure maximum performance across low-end mobile devices and data connections.
+
+============================================================
+2. CUSTOM INTERACTIVE NEURAL MESH (NeuralNetwork.tsx)
+============================================================
+- HTML5 Canvas Physics Engine: Built a custom 2D particle system representing a neural network.
+- Features: 80 autonomous particles, dynamic velocity damping, mouse repulsion mathematics, and pulsing nodes (simulating firing neurons).
+- Mobile Optimizations:
+  - Touch-device detection using `window.matchMedia('(pointer: coarse)')`.
+  - Mouse repulsion is disabled on mobile so particles merely drift.
+  - Fully scrollable on mobile via `touch-action: pan-y`, passive event listeners, and `z-index: -1`.
+
+============================================================
+3. BINARY THEME ENGINE (CustomThemeToggle.tsx)
+============================================================
+- Replaced the standard sun/moon emoji switch with a minimalist "0 / 1" Binary System Switch.
+- Cinematic Transition: Implemented a bespoke Dark/Light mode transition using CSS `clip-path: circle()`. The theme transition expands outward radially from the exact center coordinates of the toggle button over a 0.8-second, 90% opaque sweep overlay.
+- Mobile-optimized: Added `touch-action: manipulation` to remove the 300ms tap delay.
+
+============================================================
+4. MOBILE RESPONSIVE LAYOUT (globals.css & page.tsx)
+============================================================
+- Header Restructure: Overhauled the header to be a single-row flex/grid setup on both desktop and mobile (`grid-cols-[auto_1fr_auto]`) to keep the name, resume button, and toggle cleanly on one line without wrapping.
+- Typography Scaling: Scaled down massive headings (`text-7xl` to `text-5xl`) on mobile devices.
+- Overflow Protections: Added `overflow-x: hidden`, `box-sizing: border-box`, and `word-wrap: break-word` to ensure long text ("Healthcare Recommender") does not cause horizontal scrolling.
+
+============================================================
+5. DYNAMIC UI COMPONENTS
+============================================================
+- Morphing Contact Form: Integrated EmailJS. The submit button physically morphs from a standard CTA rectangle into a circular loading spinner, and then expands into an illuminated "Success" or "Error" state using advanced `@keyframes` and inline transitions.
+- Project Showcase: Expandable accordion components for highlighting the Healthcare Recommender System (Flask/Python) and J.A.R.V.I.S. (NLP/Hardware Automation), featuring hover state animations.
+- Knowledge Grid: A structured 3-column table/grid layout detailing Generative AI, Prompt Engineering, and Data Analysis upskilling.
+- Resume Button: A continuously pulsing action button in the header showcasing a custom `pulse-glow` breathing CSS box-shadow.
+
+============================================================
+CONCLUSION
+============================================================
+The result is a lightning-fast, highly personalized digital experience that proves strong front-end capability, mobile fluidity, and an eye for modern UI/UX design, tailored specifically for an AI & Machine Learning professional.
