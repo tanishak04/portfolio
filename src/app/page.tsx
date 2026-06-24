@@ -124,6 +124,13 @@ export default function PortfolioPage() {
               tags: ['NLP', 'Python', 'Hardware Automation'],
               link: '#',
             },
+            {
+              id: 'brain-tumor',
+              title: 'BRAIN TUMOR MRI CLASSIFICATION DASHBOARD',
+              desc: 'Deep learning classification dashboard utilizing 6 encoder architectures (U-Net, U-Net++, ResU-Net, SegNet, Hybrid U-Net, DeepLabV3) with replaced decoders for real-time 4-class MRI classification (Glioma, Meningioma, Pituitary, or No Tumor) with an interactive Streamlit inference dashboard.',
+              tags: ['PyTorch', 'Streamlit', 'Deep Learning', 'Computer Vision'],
+              link: '#',
+            },
           ].map((project) => (
             <div key={project.id} className="border-b border-foreground">
               {/* Collapsed row */}

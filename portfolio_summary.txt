@@ -37,7 +37,7 @@ Stack: Next.js, React, Tailwind CSS, HTML5 Canvas, EmailJS
 5. DYNAMIC UI COMPONENTS
 ============================================================
 - Morphing Contact Form: Integrated EmailJS. The submit button physically morphs from a standard CTA rectangle into a circular loading spinner, and then expands into an illuminated "Success" or "Error" state using advanced `@keyframes` and inline transitions.
-- Project Showcase: Expandable accordion components for highlighting the Healthcare Recommender System (Flask/Python) and J.A.R.V.I.S. (NLP/Hardware Automation), featuring hover state animations.
+- Project Showcase: Expandable accordion components for highlighting the Healthcare Recommender System (Flask/Python), J.A.R.V.I.S. (NLP/Hardware Automation), and the Brain Tumor MRI Classification Dashboard (PyTorch/Streamlit/Computer Vision), featuring hover state animations.
 - Knowledge Grid: A structured 3-column table/grid layout detailing Generative AI, Prompt Engineering, and Data Analysis upskilling.
 - Resume Button: A continuously pulsing action button in the header showcasing a custom `pulse-glow` breathing CSS box-shadow.
 
