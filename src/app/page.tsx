@@ -42,7 +42,7 @@ export default function PortfolioPage() {
           <div className="flex items-center">TANISHAK MOHAN KATIYAR</div>
           <div className="flex items-center justify-center">
             <a
-              href="https://drive.google.com/file/d/1TMEU7xTc_c7e8VnXCqBAmkGA7CqTV4EY/view?usp=sharing"
+              href="/Tanishak_Mohan_Katiyar_Resume.pdf"
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-2 rounded-full px-3 md:px-5 py-1.5 md:py-2 border border-foreground/40 hover:border-foreground hover:bg-foreground/5 transition-all duration-500 text-[10px] md:text-sm"
