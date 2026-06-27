@@ -129,7 +129,7 @@ export default function PortfolioPage() {
               title: 'BRAIN TUMOR MRI CLASSIFICATION DASHBOARD',
               desc: 'Deep learning classification dashboard utilizing 6 encoder architectures (U-Net, U-Net++, ResU-Net, SegNet, Hybrid U-Net, DeepLabV3) with replaced decoders for real-time 4-class MRI classification (Glioma, Meningioma, Pituitary, or No Tumor) with an interactive Streamlit inference dashboard.',
               tags: ['PyTorch', 'Streamlit', 'Deep Learning', 'Computer Vision'],
-              link: '#',
+              link: 'https://github.com/tanishak04/Brain-Tumor-Classification',
             },
           ].map((project) => (
             <div key={project.id} className="border-b border-foreground">
@@ -160,7 +160,7 @@ export default function PortfolioPage() {
                     ))}
                   </div>
                   <a href={project.link} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 text-[11px] uppercase tracking-[0.2em] font-medium border-b border-foreground/30 pb-1 hover:border-foreground transition-colors duration-300">
-                    View Project
+                    {project.id === 'brain-tumor' ? 'View Repository' : 'View Project'}
                     <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
                   </a>
                 </div>
